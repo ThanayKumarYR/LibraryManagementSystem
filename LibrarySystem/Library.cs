@@ -60,5 +60,22 @@ namespace LibrarySystem
                 }
             }
         }
+
+        public void ReturnItem(ILibraryUser user, ILibraryItem item)
+        {
+            lock (_borrowedItems)
+            {
+                if (_borrowedItems.ContainsKey(user) && _borrowedItems[user].Contains(item))
+                {
+                    _borrowedItems[user].Remove(item);
+                    _catalog.Add(item);
+                    Console.WriteLine($"{user.Name} returned '{item.Title}'.");
+                }
+                else
+                {
+                    Console.WriteLine($"Sorry, '{item.Title}' was not borrowed by {user.Name}.");
+                }
+            }
+        }
     }
 }

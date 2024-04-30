@@ -26,6 +26,9 @@ namespace LibrarySystem
             library.BorrowItem(User_Thanay, book_Narayan);
             library.BorrowItem(User_Saikat, book_Shakespeare);
 
+            library.ReturnItem(User_Thanay, book_Narayan);
+            library.ReturnItem(User_Saikat, book_Shakespeare);
+
         }
     }
 }
