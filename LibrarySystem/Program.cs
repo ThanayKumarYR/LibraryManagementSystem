@@ -22,11 +22,11 @@ namespace LibrarySystem
                 Console.WriteLine($"Book: {book.Title} Author: {book.Author} Isbn: {book.ISBN}");
             }
 
-            LibraryUser User_Thanay = new LibraryUser("Thanay", 1);
-            LibraryUser User_Saikat = new LibraryUser("Saikat", 2);
-
-            Console.WriteLine($"userId: {User_Thanay.ID} UserName: {User_Thanay.Name}");
-            Console.WriteLine($"userId: {User_Saikat.ID} UserName: {User_Saikat.Name}");
+            // Test borrowing and returning items
+            ILibraryUser User_Thanay = new LibraryUser("Thanay", 1);
+            ILibraryUser User_Saikat = new LibraryUser("Saikat", 2);
+            ILibraryItem book_Narayan = library.SearchItemsByAuthor("R. K. Narayan").FirstOrDefault();
+            ILibraryItem book_Shakespeare = library.SearchItemsByAuthor("William Shakespeare").FirstOrDefault();
 
         }
     }

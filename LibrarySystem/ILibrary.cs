@@ -9,6 +9,7 @@ namespace LibrarySystem
     public interface ILibrary : IEnumerable<ILibraryItem>
     {
         void AddItem(ILibraryItem item);
+        List<ILibraryItem> SearchItemsByAuthor(string author);
 
     }
 }

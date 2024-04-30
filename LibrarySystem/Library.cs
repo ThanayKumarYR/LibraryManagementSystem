@@ -31,5 +31,11 @@ namespace LibrarySystem
         {
             return GetEnumerator();
         }
+
+        // LINQ query to filter items by author
+        public List<ILibraryItem> SearchItemsByAuthor(string author)
+        {
+            return _catalog.Where(item => item.Author.Equals(author, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
     }
 }
