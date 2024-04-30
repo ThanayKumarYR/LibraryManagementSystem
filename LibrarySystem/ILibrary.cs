@@ -12,6 +12,8 @@ namespace LibrarySystem
         List<ILibraryItem> SearchItemsByAuthor(string author);
         void BorrowItem(ILibraryUser user, ILibraryItem item);
         void ReturnItem(ILibraryUser user, ILibraryItem item);
-
+        void SortItemsByTitle();
+        List<ILibraryUser> FindUsersByName(string name);
+        void AddUsers(ILibraryUser user);
     }
 }

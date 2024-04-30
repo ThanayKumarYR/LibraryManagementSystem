@@ -11,17 +11,24 @@ namespace LibrarySystem
     public class Library : ILibrary
     {
         private List<ILibraryItem> _catalog;
+        private List<ILibraryUser> _libraryUsers;
         private Dictionary<ILibraryUser, List<ILibraryItem>> _borrowedItems;
         public Library()
         {
             _catalog = new List<ILibraryItem>();
             _borrowedItems = new Dictionary<ILibraryUser, List<ILibraryItem>>();
+            _libraryUsers = new List<ILibraryUser>();
         }
 
         // Add an item to the library catalog
         public void AddItem(ILibraryItem item)
         {
             _catalog.Add(item);
+        }
+
+        public void AddUsers(ILibraryUser user)
+        {
+            _libraryUsers.Add(user);
         }
 
         public IEnumerator<ILibraryItem> GetEnumerator()
@@ -77,5 +84,19 @@ namespace LibrarySystem
                 }
             }
         }
+
+        // LINQ query to sort items by title
+        public void SortItemsByTitle()
+        {
+            _catalog = _catalog.OrderBy(item => item.Title).ToList();
+        }
+
+        // LINQ query to find users by name
+        public List<ILibraryUser> FindUsersByName(string name)
+        {
+            // Assuming users are stored elsewhere
+            return _libraryUsers.Where(user => user.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
     }
 }
