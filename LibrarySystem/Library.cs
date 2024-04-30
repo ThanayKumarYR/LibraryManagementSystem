@@ -98,5 +98,26 @@ namespace LibrarySystem
             return _libraryUsers.Where(user => user.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
+        // Method to handle borrowing and returning items concurrently
+        public void ConcurrentBorrowReturn()
+        {
+            // Test borrowing and returning items by multiple users concurrently
+            Console.WriteLine("\nTesting the borrowing and returning items by multiple users concurrently");
+            ILibraryUser user1 = new LibraryUser("Yashwant", 1);
+            ILibraryUser user2 = new LibraryUser("Lakshmi", 2);
+            ILibraryItem item1 = _catalog.FirstOrDefault();
+            ILibraryItem item2 = _catalog.LastOrDefault();
+
+            Thread thread1 = new Thread(() => BorrowItem(user1, item1));
+            Thread thread2 = new Thread(() => BorrowItem(user2, item2));
+            thread1.Start();
+            thread2.Start();
+
+            thread1.Join();
+            thread2.Join();
+
+            ReturnItem(user1, item1);
+            ReturnItem(user2, item2);
+        }
     }
 }

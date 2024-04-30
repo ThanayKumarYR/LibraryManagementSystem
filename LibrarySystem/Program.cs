@@ -53,6 +53,9 @@ namespace LibrarySystem
 
             Console.WriteLine($"Numbers of user with name Thanay: {usersWithName.Count}");
 
+            // Test concurrent borrowing and returning of items
+            ((Library)library).ConcurrentBorrowReturn();
+
         }
     }
 }
