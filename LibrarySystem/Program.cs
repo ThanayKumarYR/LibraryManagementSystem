@@ -12,11 +12,15 @@ namespace LibrarySystem
         {
             Console.WriteLine("Geting started with Library Management System !");
 
-            Book Book_MalgudiDays = new Book("Book_MalgudiDays", "R. K. Narayan", "9788185986173");
-            Book Book_RomeoAndJuliet = new Book("Romeo and Juliet", "William Shakespeare", "9789380816272");
+            ILibrary library = new Library();
 
-            Console.WriteLine($"Book: {Book_MalgudiDays.Title} Author: {Book_MalgudiDays.Author} Isbn: {Book_MalgudiDays.ISBN}");
-            Console.WriteLine($"Book: {Book_RomeoAndJuliet.Title} Author: {Book_RomeoAndJuliet.Author} Isbn: {Book_RomeoAndJuliet.ISBN}");
+            library.AddItem(new Book("Book_MalgudiDays", "R. K. Narayan", "9788185986173"));
+            library.AddItem( new Book("Romeo and Juliet", "William Shakespeare", "9789380816272"));
+
+            foreach (Book book in library)
+            {
+                Console.WriteLine($"Book: {book.Title} Author: {book.Author} Isbn: {book.ISBN}");
+            }
 
             LibraryUser User_Thanay = new LibraryUser("Thanay", 1);
             LibraryUser User_Saikat = new LibraryUser("Saikat", 2);
