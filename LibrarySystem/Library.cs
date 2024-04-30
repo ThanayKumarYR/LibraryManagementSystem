@@ -11,9 +11,11 @@ namespace LibrarySystem
     public class Library : ILibrary
     {
         private List<ILibraryItem> _catalog;
+        private Dictionary<ILibraryUser, List<ILibraryItem>> _borrowedItems;
         public Library()
         {
             _catalog = new List<ILibraryItem>();
+            _borrowedItems = new Dictionary<ILibraryUser, List<ILibraryItem>>();
         }
 
         // Add an item to the library catalog
@@ -36,6 +38,27 @@ namespace LibrarySystem
         public List<ILibraryItem> SearchItemsByAuthor(string author)
         {
             return _catalog.Where(item => item.Author.Equals(author, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        public void BorrowItem(ILibraryUser user, ILibraryItem item)
+        {
+            lock (_borrowedItems)
+            {
+                if (_catalog.Contains(item))
+                {
+                    _catalog.Remove(item);
+                    if (!_borrowedItems.ContainsKey(user))
+                    {
+                        _borrowedItems[user] = new List<ILibraryItem>();
+                    }
+                    _borrowedItems[user].Add(item);
+                    Console.WriteLine($"{user.Name} borrowed '{item.Title}'.");
+                }
+                else
+                {
+                    Console.WriteLine($"Sorry, '{item.Title}' is not available.");
+                }
+            }
         }
     }
 }

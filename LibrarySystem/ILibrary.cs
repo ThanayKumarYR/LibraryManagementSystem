@@ -10,6 +10,7 @@ namespace LibrarySystem
     {
         void AddItem(ILibraryItem item);
         List<ILibraryItem> SearchItemsByAuthor(string author);
+        void BorrowItem(ILibraryUser user, ILibraryItem item);
 
     }
 }
